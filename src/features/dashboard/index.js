@@ -7,12 +7,13 @@ import UsersIcon  from '@heroicons/react/24/outline/UsersIcon'
 import CircleStackIcon  from '@heroicons/react/24/outline/CircleStackIcon'
 import CreditCardIcon  from '@heroicons/react/24/outline/CreditCardIcon'
 import UserChannels from './components/UserChannels'
-import LineChart from './components/LineChart'
 import BarChart from './components/BarChart'
 import DashboardTopBar from './components/DashboardTopBar'
 import { useDispatch } from 'react-redux'
 import {showNotification} from '../common/headerSlice'
 import DoughnutChart from './components/DoughnutChart'
+import ExternalLineChart from '../../components/Hocs/ExternalLineChart'
+
 
 const statsData = [
     {title : "New Users", value : "34.7k", icon : <UserGroupIcon className='w-8 h-8'/>, description : "↗︎ 2300 (22%)"},
@@ -25,21 +26,13 @@ const statsData = [
 
 function Dashboard(){
 
-    const dispatch = useDispatch()
- 
-
-    const updateDashboardPeriod = (newRange) => {
-        // Dashboard range changed, write code to refresh your values
-        dispatch(showNotification({message : `Period updated to ${newRange.startDate} to ${newRange.endDate}`, status : 1}))
-    }
-
     return(
         <>
         {/** ---------------------- Select Period Content ------------------------- */}
-            <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod}/>
+            {/* <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod}/> */}
         
         {/** ---------------------- Different stats content 1 ------------------------- */}
-            <div className="grid grid-cols-1 gap-6 mt-2 lg:grid-cols-4 md:grid-cols-2">
+            {/* <div className="grid grid-cols-1 gap-6 mt-2 lg:grid-cols-4 md:grid-cols-2">
                 {
                     statsData.map((d, k) => {
                         return (
@@ -47,29 +40,29 @@ function Dashboard(){
                         )
                     })
                 }
-            </div>
+            </div> */}
 
 
 
         {/** ---------------------- Different charts ------------------------- */}
             <div className="grid grid-cols-1 gap-6 mt-4 lg:grid-cols-1">
-                <LineChart />
+                <ExternalLineChart />
                 <BarChart />
             </div>
             
-        {/** ---------------------- Different stats content 2 ------------------------- */}
+ 
         
-            <div className="grid grid-cols-1 gap-6 mt-10 lg:grid-cols-2">
+            {/* <div className="grid grid-cols-1 gap-6 mt-10 lg:grid-cols-2">
                 <AmountStats />
                 <PageStats />
-            </div>
+            </div> */}
 
         {/** ---------------------- User source channels table  ------------------------- */}
         
-            <div className="grid grid-cols-1 gap-6 mt-4 lg:grid-cols-2">
+            {/* <div className="grid grid-cols-1 gap-6 mt-4 lg:grid-cols-2">
                 <UserChannels />
                 <DoughnutChart />
-            </div>
+            </div>1 */}
         </>
     )
 }
