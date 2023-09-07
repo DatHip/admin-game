@@ -41,7 +41,7 @@ function ProfileSettings(){
     
     return(
         <>
-            <TitleCard title="Profile Settings" topMargin="mt-2">
+            <TitleCard title="Profile" topMargin="mt-2">
                 {/* Search  */}
     
                 <div className="flex items-center gap-4 mb-2">

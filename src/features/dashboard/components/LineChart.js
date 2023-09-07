@@ -35,7 +35,7 @@ function LineChart(){
   };
 
   
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = ['ccu', 'cpuLoad', 'runtimeTotalMemory', 'runtimeFreeMemory', 'runtimeUsedMemory', 'committedHeapMemoryUse', 'usedHeapMemoryUse' , 'maxHeapMemoryUse', 'committedHeapMemoryUseNonHeap', 'usedHeapMemoryUseNonHeap' , 'maxHeapMemoryUseNonHeap' , 'totalMemory' , 'freeMemory' , 'usedMemory'];
 
   const data = {
   labels,
@@ -45,14 +45,13 @@ function LineChart(){
       label: 'MAU',
       data: labels.map(() => { return Math.random() * 100 + 500 }),
       borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      backgroundColor: 'transparent',
     },
   ],
 };
   
-
     return(
-      <TitleCard title={"Montly Active Users (in K)"}>
+      <TitleCard title={"System Info Data"}>
           <Line data={data} options={options}/>
       </TitleCard>
     )

@@ -9,18 +9,6 @@ import 'react-notifications/lib/notifications.css';
 import ModalLayout from "./ModalLayout"
 
 function Layout(){
-  const dispatch = useDispatch()
-  const {newNotificationMessage, newNotificationStatus} = useSelector(state => state.header)
-
-
-  useEffect(() => {
-      if(newNotificationMessage !== ""){
-          if(newNotificationStatus === 1)NotificationManager.success(newNotificationMessage, 'Success')
-          if(newNotificationStatus === 0)NotificationManager.error( newNotificationMessage, 'Error')
-          dispatch(removeNotificationMessage())
-      }
-  }, [newNotificationMessage])
-
     return(
       <>
         { /* Left drawer - containing page content and side bar (always open) */ }

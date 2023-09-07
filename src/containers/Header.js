@@ -43,14 +43,14 @@ function Header(){
 
     return(
         <>
-            <div className="navbar  flex justify-between bg-base-100  z-10 shadow-md ">
+            <div className="z-10 flex justify-between shadow-md navbar bg-base-100 ">
 
 
                 {/* Menu toogle for mobile view or small screen */}
                 <div className="">
                     <label htmlFor="left-sidebar-drawer" className="btn btn-primary drawer-button lg:hidden">
-                    <Bars3Icon className="h-5 inline-block w-5"/></label>
-                    <h1 className="text-2xl font-semibold ml-2">{pageTitle}</h1>
+                    <Bars3Icon className="inline-block w-5 h-5"/></label>
+                    <h1 className="ml-2 text-2xl font-semibold">{pageTitle}</h1>
                 </div>
 
                 
@@ -60,7 +60,7 @@ function Header(){
                 {/* Multiple theme selection, uncomment this if you want to enable multiple themes selection, 
                 also includes corporate and retro themes in tailwind.config file */}
                 
-                {/* <select className="select select-sm mr-4" data-choose-theme>
+                {/* <select className="mr-4 select select-sm" data-choose-theme>
                     <option disabled selected>Theme</option>
                     <option value="light">Default</option>
                     <option value="dark">Dark</option>
@@ -78,30 +78,30 @@ function Header(){
 
 
                 {/* Notification icon */}
-                <button className="btn btn-ghost ml-4  btn-circle" onClick={() => openNotification()}>
+                <button className="ml-4 btn btn-ghost btn-circle" onClick={() => openNotification()}>
                     <div className="indicator">
-                        <BellIcon className="h-6 w-6"/>
+                        <BellIcon className="w-6 h-6"/>
                         {noOfNotifications > 0 ? <span className="indicator-item badge badge-secondary badge-sm">{noOfNotifications}</span> : null }
                     </div>
                 </button>
 
 
                 {/* Profile icon, opening menu on click */}
-                <div className="dropdown dropdown-end ml-4">
+                <div className="ml-4 dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
                         <img src="https://placeimg.com/80/80/people" alt="profile" />
                         </div>
                     </label>
-                    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                    <ul tabIndex={0} className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                         <li className="justify-between">
                         <Link to={'/app/settings-profile'}>
-                            Profile Settings
+                            Profile
                             <span className="badge">New</span>
                             </Link>
                         </li>
                         <li className=''><Link to={'/app/settings-billing'}>Bill History</Link></li>
-                        <div className="divider mt-0 mb-0"></div>
+                        <div className="mt-0 mb-0 divider"></div>
                         <li><a onClick={logoutUser}>Logout</a></li>
                     </ul>
                 </div>

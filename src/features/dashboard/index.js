@@ -13,7 +13,6 @@ import DashboardTopBar from './components/DashboardTopBar'
 import { useDispatch } from 'react-redux'
 import {showNotification} from '../common/headerSlice'
 import DoughnutChart from './components/DoughnutChart'
-import { useState } from 'react'
 
 const statsData = [
     {title : "New Users", value : "34.7k", icon : <UserGroupIcon className='w-8 h-8'/>, description : "↗︎ 2300 (22%)"},
@@ -40,7 +39,7 @@ function Dashboard(){
             <DashboardTopBar updateDashboardPeriod={updateDashboardPeriod}/>
         
         {/** ---------------------- Different stats content 1 ------------------------- */}
-            <div className="grid lg:grid-cols-4 mt-2 md:grid-cols-2 grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6 mt-2 lg:grid-cols-4 md:grid-cols-2">
                 {
                     statsData.map((d, k) => {
                         return (
@@ -53,21 +52,21 @@ function Dashboard(){
 
 
         {/** ---------------------- Different charts ------------------------- */}
-            <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6 mt-4 lg:grid-cols-1">
                 <LineChart />
                 <BarChart />
             </div>
             
         {/** ---------------------- Different stats content 2 ------------------------- */}
         
-            <div className="grid lg:grid-cols-2 mt-10 grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6 mt-10 lg:grid-cols-2">
                 <AmountStats />
                 <PageStats />
             </div>
 
         {/** ---------------------- User source channels table  ------------------------- */}
         
-            <div className="grid lg:grid-cols-2 mt-4 grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6 mt-4 lg:grid-cols-2">
                 <UserChannels />
                 <DoughnutChart />
             </div>
