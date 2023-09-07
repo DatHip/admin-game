@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import ErrorText from  '../../components/Typography/ErrorText'
 import InputText from '../../components/Input/InputText'
 import { apiPost} from '../../utils/https/request'
+import { toast } from 'react-hot-toast'
 
 function Login(){
 
@@ -25,15 +26,19 @@ function Login(){
         else{
             setLoading(true)
             // Call API to check user credentials and save token in localstorage
-            // localStorage.setItem("token", "DumyTokenHere")
-
+            
             try {
                 const res = await apiPost('login' , loginObj)
-                console.log(res)
                 if (res?.error === 0) {
-
+                    if(res?.data?.role > 8) {
+                        localStorage.setItem("token", res?.data?.token)
+                        localStorage.setItem("userid", res?.data?.id)
+                        window.location.href = '/app/dashboard'
+                    } else {
+                        toast.error('Ko đủ quyền hạng')
+                    }
                 } else {
-                
+                    toast.error(res?.message)
                 }
             } catch (error) {
                 console.log(error)
@@ -41,7 +46,6 @@ function Login(){
 
 
             setLoading(false)
-            // window.location.href = '/app/welcome'
         }
     }
 
@@ -71,7 +75,7 @@ function Login(){
                         <ErrorText styleClass="mt-8">{errorMessage}</ErrorText>
                         <button type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Login</button>
 
-                        <div className='mt-4 text-center'>Don't have an account yet? <Link to="/register"><span className="inline-block transition duration-200 hover:text-primary hover:underline hover:cursor-pointer">Register</span></Link></div>
+                        {/* <div className='mt-4 text-center'>Don't have an account yet? <Link to="/register"><span className="inline-block transition duration-200 hover:text-primary hover:underline hover:cursor-pointer">Register</span></Link></div> */}
                     </form>
                 </div>
             </div>

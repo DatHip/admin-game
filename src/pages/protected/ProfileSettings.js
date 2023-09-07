@@ -10,7 +10,7 @@ function InternalPage(){
         dispatch(setPageTitle({ title : "Settings"}))
       }, [])
 
-
+      
     return(
         <ProfileSettings />
     )

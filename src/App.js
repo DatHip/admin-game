@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { themeChange } from 'theme-change'
 import checkAuth from './app/auth';
 import initializeApp from './app/init';
+import { Toaster } from 'react-hot-toast';
 
 // Importing pages
 const Layout = lazy(() => import('./containers/Layout'))
@@ -14,7 +15,7 @@ const Documentation = lazy(() => import('./pages/Documentation'))
 
 
 // Initializing different libraries
-initializeApp()
+// initializeApp()
 
 
 // Check for login and initialize axios
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <>
+      <Toaster position="bottom-left"></Toaster>
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -41,7 +43,7 @@ function App() {
           {/* Place new routes over this */}
           <Route path="/app/*" element={<Layout />} />
 
-          <Route path="*" element={<Navigate to={token ? "/app/welcome" : "/login"} replace />}/>
+          <Route path="*" element={<Navigate to={token ? "/app/dashboard" : "/login"} replace />}/>
 
         </Routes>
       </Router>

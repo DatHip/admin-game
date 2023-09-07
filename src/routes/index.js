@@ -45,6 +45,10 @@ const routes = [
     component: Transactions,
   },
   {
+    path: '/search-profile/:id',
+    component: ProfileSettings,
+  },
+  {
     path: '/settings-profile',
     component: ProfileSettings,
   },

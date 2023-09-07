@@ -1,5 +1,5 @@
 
-import axios from 'axios';
+import axios from './AxiosInterceptor';
 
 export async function apiPost(url, payload, header = {}) {
   try {
