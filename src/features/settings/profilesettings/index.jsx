@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import TitleCard from "../../../components/Cards/TitleCard"
 import InputText from '../../../components/Input/InputText'
 import { useState } from "react"
@@ -8,14 +7,12 @@ import { tmpAPI } from "../../../utils/https/tmpApi"
 import ReactJson from "react-json-view"
 import { toast } from "react-hot-toast"
 
-
 function ProfileSettings(){
     const [id, setId] = useState('')
     const [loading, setLoading] = useState(false)
     const [loadingUpdate, setLoadingUpdate] = useState(false)
     const [data,setData] = useState(null)
-    
-
+    const isDarkMode = localStorage.getItem('theme') === 'light' ? false : true
     const handleChangeId  = e => {
         setId(e.value)   
     }
@@ -79,7 +76,7 @@ function ProfileSettings(){
                     }}
                     iconStyle={'triangle'}
                     displayObjectSize={false}
-                     displayDataTypes={false} src={data} theme="ashes" />
+                     displayDataTypes={false} src={data} theme={isDarkMode ? 'apathy' : 'apathy:inverted'} />
                 
                 <div className="mt-16"><Button loading={loadingUpdate} disable={loadingUpdate} className="float-right btn btn-primary" onClick={handleUpdateProfile}>Update</Button></div>
                 </>

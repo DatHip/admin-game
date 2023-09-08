@@ -58,7 +58,7 @@ const LineChart = ({info}) => {
        usePointStyle: true,
     },
     hover: {
-       mode: "dataset",
+       mode: "x",
        intersect: false,
        includeInvisible: true,
     },
