@@ -24,7 +24,7 @@ function LeftSidebar(){
 
                 <li className="mb-2 text-xl font-semibold">
                     
-                    <Link to={'/app/dashboard'}><img className="w-10 mask mask-squircle" src="/logoMeepo.png" alt="Meepo    Settings "/>Meepo Settings</Link> </li>
+                    <Link to={'/app/dashboard'}><img className="w-10 mask mask-squircle" src="/logoMeepo.png" alt="Meepo"/>Meepo Admin</Link> </li>
                 {
                     routes.map((route, k) => {
                         return(

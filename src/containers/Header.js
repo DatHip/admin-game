@@ -90,7 +90,7 @@ function Header(){
                 <div className="ml-4 dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                        <img src="https://placeimg.com/80/80/people" alt="profile" />
+                        <img src="https://avatar.talk.zdn.vn/default" alt="profile" />
                         </div>
                     </label>
                     <ul tabIndex={0} className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import TitleCard from '../../../components/Cards/TitleCard';
-import { currentDate, formatTime } from '../../../utils/currentDate';
+import { generateTimeArray } from '../../../utils/currentDate';
 import { useMemo } from 'react';
 
 ChartJS.register(
@@ -25,40 +25,10 @@ ChartJS.register(
   Legend
 );
 
-
-function generateTimeArray() {
-   const timeArray = [];
-   let currentTime = currentDate();
- 
-   for (let i = 0; i < 100; i++) {
-     const formattedTime = formatTime(currentTime.hours, currentTime.minutes, currentTime.seconds);
-     timeArray.push(formattedTime);
- 
-     // Cập nhật thời gian cho lần tiếp theo
-     currentTime.seconds += 15;
-     if (currentTime.seconds >= 60) {
-       currentTime.seconds -= 60;
-       currentTime.minutes++;
-     }
-     if (currentTime.minutes >= 60) {
-       currentTime.minutes -= 60;
-       currentTime.hours++;
-     }
-     if (currentTime.hours >= 24) {
-       currentTime.hours = 0;
-     }
-   }
- 
-   return timeArray;
- }
-
 const LineChart = ({info}) => {
-   const labels = useMemo(() => {
-      const timeArray = generateTimeArray();
-      return timeArray
-   } ,[info])
+ const labels = useMemo(() => generateTimeArray(),[info])
 
-  const options = {
+  const options = useMemo(() => ({
     animations: {
        radius: {
           duration: 300,
@@ -106,9 +76,9 @@ const LineChart = ({info}) => {
         alignToPixels: true,
      },
     },
- }
-  
-  const data = {
+ }) , [])
+   
+  const data = useMemo(() => ({
     labels,
     datasets: [
       {
@@ -202,7 +172,7 @@ const LineChart = ({info}) => {
         tension: 0.1,
       },
     ],
-  };
+  }) , []);
   
     return(
       <TitleCard title={"System Info Data"}>
