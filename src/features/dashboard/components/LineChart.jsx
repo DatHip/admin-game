@@ -11,7 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import TitleCard from '../../../components/Cards/TitleCard';
-import { generateTimeArray } from '../../../utils/currentDate';
+import {  timestampToHHMMSS } from '../../../utils/currentDate';
 import { useMemo } from 'react';
 
 ChartJS.register(
@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 const LineChart = ({info}) => {
- const labels = useMemo(() => generateTimeArray(),[info])
+ const labels = useMemo(() => info?.map(e => timestampToHHMMSS(e?.timestamp)),[info])
 
   const options = useMemo(() => ({
     animations: {

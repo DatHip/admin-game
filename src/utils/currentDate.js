@@ -11,7 +11,16 @@ function formatTime(hours, minutes, seconds) {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
+function timestampToHHMMSS(timestamp) {
+  const currentDate = new Date(timestamp);
 
+// Lấy giờ, phút và giây từ đối tượng Date
+const currentHour = currentDate.getHours();
+const currentMinute = currentDate.getMinutes();
+const currentSecond = currentDate.getSeconds();
+
+  return `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}:${String(currentSecond).padStart(2, '0')}`;
+}
   
 function generateTimeArray() {
   const timeArray = [];
@@ -39,4 +48,4 @@ function generateTimeArray() {
   return timeArray;
 }
 
-export  {currentDate , formatTime , generateTimeArray};
+export  {currentDate , formatTime , generateTimeArray , timestampToHHMMSS};
