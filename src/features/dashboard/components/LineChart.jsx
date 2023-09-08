@@ -52,11 +52,10 @@ function generateTimeArray() {
    return timeArray;
  }
 
-
 const LineChart = ({info}) => {
    const labels = useMemo(() => {
       const timeArray = generateTimeArray();
-      return timeArray.reverse((a,b) => a - b)
+      return timeArray
    } ,[info])
 
   const options = {
@@ -67,8 +66,8 @@ const LineChart = ({info}) => {
           loop: (context) => context.active,
        },
     },
-    datasetStrokeWidth: 10,
-    pointDotStrokeWidth: 10,
+    datasetStrokeWidth: 4,
+    pointDotStrokeWidth: 4,
     tooltipFillColor: "rgb(0,0,0)",
     interaction: {
        mode: "index",
@@ -95,40 +94,115 @@ const LineChart = ({info}) => {
     },
     scales: {
        y: {
-          min: -0.5,
-          display: false,
+          min: -0.1,
        },
        x: {
-          ticks: {
-            //  callback: function (val, index) {
-            //     return index % 2 === 0 ? this.getLabelForValue(val) : ""
-            //  },
-             padding: 0,
-          },
-          alignToPixels: true,
-       },
+        ticks: {
+           callback: function (val, index) {
+              return index % 2 === 0 ? this.getLabelForValue(val) : ""
+           },
+           padding: 0,
+        },
+        alignToPixels: true,
+     },
     },
  }
   
   const data = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'CUU',
-      data: info.map((e) => e?.ccu ),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'transparent',
-    },
-    {
-      fill: true,
-      label: 'cpuLoad',
-      data: info.map((e) => e?.cpuLoad ),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'transparent',
-    },
-  ],
-};
+    labels,
+    datasets: [
+      {
+        label: 'CUU',
+        data: info?.map((e) => e?.ccu),
+        borderColor: '#1F78B4',
+        tension: 0.1,
+      },
+      {
+        label: 'CPU Load',
+        data: info?.map((e) => e?.cpuLoad ),
+        borderColor: '#33A02C',
+        tension: 0.1,
+  
+      },
+      {
+        hidden: true,
+        label: 'Free Memory',
+        data: info?.map((e) => e?.freeMemory ),
+        borderColor: '#6A3D9A',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Committed Heap Memory Use',
+        data: info?.map((e) => e?.committedHeapMemoryUse),
+        borderColor: '#B15928',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Committed Heap Memory Use Non Heap',
+        data: info?.map((e) => e?.committedHeapMemoryUseNonHeap),
+        borderColor: '#E31A1C',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Max Heap Memory Use',
+        data: info?.map((e) => e?.maxHeapMemoryUse),
+        borderColor: '#A6CEE3',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Runtime Free Memory',
+        data: info?.map((e) => e?.runtimeFreeMemory),
+        borderColor: '#B2DF8A',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Runtime Total Memory',
+        data: info?.map((e) => e?.runtimeTotalMemory),
+        borderColor: '#CAB2D6',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Runtime Used Memory',
+        data: info?.map((e) => e?.runtimeUsedMemory),
+        borderColor: '#FB9A99',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Total Memory',
+        data: info?.map((e) => e?.totalMemory),
+        borderColor: '#FDBF6F',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Used Heap Memory Use',
+        data: info?.map((e) => e?.usedHeapMemoryUse),
+        borderColor: '#FF7F00',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Used Heap Memory Use Non Heap',
+        data: info?.map((e) => e?.usedHeapMemoryUseNonHeap),
+        borderColor: '#FFFF99',
+        tension: 0.1,
+      },
+      {
+        hidden: true,
+        label: 'Used Memory',
+        data: info?.map((e) => e?.usedMemory),
+        borderColor: '#9747FF',
+        tension: 0.1,
+      },
+    ],
+  };
   
     return(
       <TitleCard title={"System Info Data"}>
