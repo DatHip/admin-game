@@ -1,13 +1,13 @@
 import axios from 'axios';
 export const baseDomainV1 = process.env.REACT_APP_BASE_URL;
-const baseDomainSandboxBs = 'https://api.meepogames.com/bs'
-const baseDomainProductionBs = 'https://api.godoo.asia/bs'
+const baseDomainSandboxBs = 'https://api.godoo.asia/bs'
+const baseDomainProductionBs = 'https://api.meepogames.com/bs'
 
 const urlSandboxBs = 'https://admin-bs-sandbox.vercel.app'
 const urlProductionBs = 'https://admin-bs-production.vercel.app'
 
-const baseDomainSandboxDm = 'https://api.meepogames.com/dm'
-const baseDomainProductionDm = 'https://api.godoo.asia/dm'
+const baseDomainSandboxDm = 'https://api.godoo.asia/dm'
+const baseDomainProductionDm = 'https://api.meepogames.com/dm'
 
 const urlSandboxDm = 'https://admin-dm-sandbox.vercel.app'
 const urlProductionDm = 'https://admin-dm-production.vercel.app'
