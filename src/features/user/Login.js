@@ -69,13 +69,12 @@ function Login(){
 
                         </div>
 
-                        {/* <div className='text-right text-primary'><Link to="/forgot-password"><span className="inline-block text-sm transition duration-200 hover:text-primary hover:underline hover:cursor-pointer">Forgot Password?</span></Link>
-                        </div> */}
+                     
 
                         <ErrorText styleClass="mt-8">{errorMessage}</ErrorText>
                         <button type="submit" className={"btn mt-2 w-full btn-primary" + (loading ? " loading" : "")}>Login</button>
 
-                        {/* <div className='mt-4 text-center'>Don't have an account yet? <Link to="/register"><span className="inline-block transition duration-200 hover:text-primary hover:underline hover:cursor-pointer">Register</span></Link></div> */}
+                        <div className='mt-4 text-center'>Don't have an account yet? <Link to="/register"><span className="inline-block transition duration-200 hover:text-primary hover:underline hover:cursor-pointer">Register</span></Link></div>
                     </form>
                 </div>
             </div>
