@@ -1,50 +1,48 @@
-import axios from 'axios';
+import axios from "axios";
 export const baseDomainV1 = process.env.REACT_APP_BASE_URL;
-const baseDomainSandboxBs = 'https://api.godoo.asia/bs'
-const baseDomainProductionBs = 'https://api.meepogames.com/bs'
+const baseDomainSandboxBs = "https://api.godoo.asia/bs";
+const baseDomainProductionBs = "https://api.meepogames.com/bs";
 
-const urlSandboxBs = 'https://admin-bs-sandbox.vercel.app'
-const urlProductionBs = 'https://admin-bs-production.vercel.app'
+const urlSandboxBs = "https://admin-bs-sandbox.vercel.app";
+const urlProductionBs = "https://admin-bs-production.vercel.app";
 
-const baseDomainSandboxDm = 'https://api.godoo.asia/dm'
-const baseDomainProductionDm = 'https://api.meepogames.com/dm'
+const baseDomainSandboxDm = "https://api.godoo.asia/dm";
+const baseDomainProductionDm = "https://api.meepogames.com/dm";
 
-const urlSandboxDm = 'https://admin-dm-sandbox.vercel.app'
-const urlProductionDm = 'https://admin-dm-production.vercel.app'
+const urlSandboxDm = "https://admin-dm-sandbox.vercel.app";
+const urlProductionDm = "https://admin-dm-production.vercel.app";
 
+export const urlApi = [
+  {
+    label: "BattleShip Sandbox ",
+    value: "https://api.godoo.asia/bs",
+  },
+  {
+    label: "BattleShip Production",
+    value: "https://api.meepogames.com/bs",
+  },
+  {
+    label: "Domino Sandbox",
+    value: "https://api.godoo.asia/dm",
+  },
+  {
+    label: "Domino Production",
+    value: "https://api.meepogames.com/dm",
+  },
+];
 
 const getBaseDomain = () => {
-  const url = window.location.href
+  const url = localStorage.getItem("api_admin");
+  return url;
+};
 
-  // Bs
-  if(url.includes(urlSandboxBs)) {
-    return baseDomainSandboxBs
-  }
-  if(url.includes(urlProductionBs)) {
-    return baseDomainProductionBs
-  }
-
-  // Dm
-  if(url.includes(urlSandboxDm)) {
-    return baseDomainSandboxDm
-  }
-  if(url.includes(urlProductionDm)) {
-    return baseDomainProductionDm
-  }
-
-  return baseDomainSandboxBs
-
-}
-
-const instance = axios.create({
-  baseURL: getBaseDomain(),
-});
+const instance = axios.create();
 
 // Axios gửi request
 instance.interceptors.request.use(
-  async config => {
-    const token = localStorage.getItem("token")
-    const userid = localStorage.getItem("userid")
+  async (config) => {
+    const token = localStorage.getItem("token");
+    const userid = localStorage.getItem("userid");
 
     if (token) {
       if (token) {
@@ -55,20 +53,19 @@ instance.interceptors.request.use(
 
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // Xử lý khi trả về response
 instance.interceptors.response.use(
-  async response => {
-    console.log(response)
+  async (response) => {
     return response;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 export default instance;

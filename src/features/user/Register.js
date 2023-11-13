@@ -4,49 +4,58 @@ import ErrorText from "../../components/Typography/ErrorText";
 import InputText from "../../components/Input/InputText";
 import { apiPost } from "../../utils/https/request";
 import toast from "react-hot-toast";
+import { urlApi } from "../../utils/https/AxiosInterceptor";
+import { useEffect } from "react";
 
 function Register() {
-    const INITIAL_LOGIN_OBJ = {
-        password : "",
-        username : "",
-    }
+  const INITIAL_LOGIN_OBJ = {
+    password: "",
+    username: "",
+  };
 
-    const [loading, setLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-    const [loginObj, setLoginObj] = useState(INITIAL_LOGIN_OBJ)
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loginObj, setLoginObj] = useState(INITIAL_LOGIN_OBJ);
 
-  const submitForm = async (e) =>{
-    e.preventDefault()
-    setErrorMessage("")
+  const [mode, setMode] = useState(urlApi[0]);
 
-    if(loginObj.username.trim() === "")return setErrorMessage("Email Id is required! (use any value)")
-    if(loginObj.password.trim() === "")return setErrorMessage("Password is required! (use any value)")
-    else{
-        setLoading(true)
-        
-        try {
-            const res = await apiPost('register' , loginObj)
-            if (res?.error === 0) {
-                toast.success(res?.message)
-                setTimeout(() => {
-                    window.location.href = '/login'
-                } , 1000)
-            } else {
-                toast.error(res?.message)
-            }
-        } catch (error) {
-            console.log(error)
+  useEffect(() => {
+    localStorage.setItem("api_admin", mode.value);
+  }, []);
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    if (loginObj.username.trim() === "")
+      return setErrorMessage("Email Id is required! (use any value)");
+    if (loginObj.password.trim() === "")
+      return setErrorMessage("Password is required! (use any value)");
+    else {
+      setLoading(true);
+
+      try {
+        const res = await apiPost("register", loginObj);
+        if (res?.error === 0) {
+          toast.success(res?.message);
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 1000);
+        } else {
+          toast.error(res?.message);
         }
+      } catch (error) {
+        console.log(error);
+      }
 
-
-        setLoading(false)
+      setLoading(false);
     }
-}
+  };
 
-const updateFormValue = ({updateType, value}) => {
-    setErrorMessage("")
-    setLoginObj({...loginObj, [updateType] : value})
-}
+  const updateFormValue = ({ updateType, value }) => {
+    setErrorMessage("");
+    setLoginObj({ ...loginObj, [updateType]: value });
+  };
 
   return (
     <div className="flex items-center min-h-screen bg-base-200">
@@ -54,7 +63,25 @@ const updateFormValue = ({updateType, value}) => {
         <div className="px-10 py-24">
           <h2 className="mb-2 text-2xl font-semibold text-center">Register</h2>
           <form onSubmit={(e) => submitForm(e)}>
-            <div className="mb-4">
+            <div className="mt-4 mb-6">
+              <select
+                onChange={(e) => {
+                  const value = JSON.parse(e.target.value);
+                  setMode(value);
+                  localStorage.setItem("api_admin", value.value);
+                }}
+                className="w-full select-bordered select"
+              >
+                {urlApi.map((e, index) => (
+                  <option
+                    value={JSON.stringify(e)}
+                    key={index}
+                    defaultValue={e === mode}
+                  >
+                    {e.label}
+                  </option>
+                ))}
+              </select>
               <InputText
                 type="username"
                 defaultValue={loginObj.username}
